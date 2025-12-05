@@ -40,3 +40,25 @@ numberInput.addEventListener('input', () =>{
     console.log(ParsedNumber);
 });
 */
+
+//esercizio 4: creare un input di testo e trasformare lo stesso in minuscolo o maiuscolo a seconda dell'attivazione o meno di due pulsanti
+
+let userInput = document.querySelector('#testo4');
+const btnMaiuscole = document.querySelector('#maiuscole');
+const btnMinuscole = document.querySelector('#minuscole');
+
+btnMaiuscole.addEventListener("click" ,() => {
+
+    if(typeof userInput.value === "string"){
+        userInput.value = userInput.value.toUpperCase();
+    }
+    
+})
+
+btnMinuscole.addEventListener("click" ,() => {
+
+    if(typeof userInput.value === "string"){
+        userInput.value = userInput.value.toLowerCase();
+    }
+    
+})
