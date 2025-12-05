@@ -6,12 +6,25 @@
     <title> Sezione 2</title>
     <link rel="stylesheet" type="text/css" href="style2.css">
 </head>
+
+
 <body>
+    <h1 style="display: flex; justify-content: center; width: 100%;"> Crea la tua lista di attività </h1>
+    <div style="display: flex; flex-direction: column; width: 300px; margin: auto;"> 
+        <label> Titolo attività </label>
+        <input type="text" class="js-title" placeholder="Inserisci il titolo dell'attività">
+
+        <label> Descrizione attività </label>
+        <input type="text" class="js-description" placeholder="Inserisci la Descrizione dell'attività">
+        
+        <button id="addTaskButton" style="margin-top: 10px; padding: 10px 10px;"> Aggiungi Attività </button>
 
 
-    </body>
+        <h2> Lista attività</h2>
+        <div class="js-taskList"></div>
+    </div>
 
-      <script src="script2.js"></script>
+<script src="script2.js"></script>
 </body>
     
 
