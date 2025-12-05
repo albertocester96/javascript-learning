@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina di Esempio</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <H2> 1 ESERCIZIO </H2>
@@ -29,16 +30,33 @@
         <input type="text" class="js-textInput" placeholder="Scrivi un numero"/>
     </div>
 
-    <div id="esercizio4" style="padding-top: 40px;"> 
-        <H2> 4 ESERCIZIO </H2>
-        <input type="text" id="testo4"/ style="padding: 10px 10px 10px 10px;">
+    <div id="esercizio1.1" style="padding-top: 40px;"> 
+        <H2> 1.1 ESERCIZIO </H2>
+        <input type="text" id="testo4" style="padding: 10px 10px 10px 10px;">
         <div style="flex-direction: column; padding-top: 10px;">  
             <button id="maiuscole"> MAIUSCOLE </button>
             <button id="minuscole"> Minuscole </button>
         </div>
     </div>
+
+    <div id="esercizio1.2">
+        <h2> Esercizio 1.2 - Calcolatore IVA </h2>
+        <div style="display: flex; margin: auto;"> 
+            <input type="number" id="price" style="padding: 10px 10px 10px 10px;"/>
+            <h3 class="js-prezzoFinito" style="padding-left: 20px;"> </h3>
+        </div>
+         
+        <div style="flex-direction: column; padding-top: 10px;">  
+            <button class="js-20" style="padding: 10px 10px;">  IVA 20% </button>
+            <button class="js-10" style="padding: 10px 10px;">  IVA 10% </button>
+            <button class="js-calcola" style="padding: 10px 10px; color: white; background-color: red ; border-radius: 5px;"> Calcola </button>
+        </div>
+    </div>
+
+
+      <script src="script.js"></script>
 </body>
     
 
-    <script src="script.js"></script>
+  
 </html>

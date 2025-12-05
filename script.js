@@ -39,7 +39,7 @@ numberInput.addEventListener('input', () =>{
     const ParsedNumber= Number(numberInput.value);
     console.log(ParsedNumber);
 });
-*/
+
 
 //esercizio 4: creare un input di testo e trasformare lo stesso in minuscolo o maiuscolo a seconda dell'attivazione o meno di due pulsanti
 
@@ -62,3 +62,54 @@ btnMinuscole.addEventListener("click" ,() => {
     }
     
 })
+
+
+
+//esercizio 2.1
+
+
+const btn20 = document.querySelector('.js-20');
+const btn10 = document.querySelector('.js-10');
+const btnCalcola = document.querySelector('.js-calcola');
+const prezzoFinito = document.querySelector('.js-prezzoFinito');
+const inputPrice = document.querySelector('#price');
+let selectediva = 0;
+
+function CalcolaPrezzo (iva) {
+
+    if ( iva === 10 || iva === 20 ){
+        prezzo = inputPrice.value * (1 + (iva/100));
+        prezzoFinito.textContent = prezzo.toFixed(2);
+    }
+       
+    else {
+        prezzoFinito.textContent = "Non è stato impostata l'iva da appplicare"
+    }
+}
+
+function IvaColor (iva, buttonClicked) {
+
+    selectediva = iva;
+
+    btn20.classList.remove('selected');
+    btn10.classList.remove('selected');
+
+    buttonClicked.classList.add('selected');
+
+}
+
+btn20.addEventListener('click', () => {
+    IvaColor(20, btn20);
+})
+
+
+btn10.addEventListener('click', () => {
+    IvaColor(10, btn10);
+})
+
+
+btnCalcola.addEventListener('click', () => {
+        CalcolaPrezzo(selectediva)
+    }
+);
+*/

@@ -22,7 +22,7 @@ Tutti gli esercizi sono pensati per situazioni reali di lavoro (eCommerce, dashb
 * Bottone "minuscole"
 * Output che mostra il testo trasformato
 
----
+--- COMPLETATO
 
 ### ### **1.2 — Mini Calcolatore IVA**
 
