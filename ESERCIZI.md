@@ -22,7 +22,7 @@ Tutti gli esercizi sono pensati per situazioni reali di lavoro (eCommerce, dashb
 * Bottone "minuscole"
 * Output che mostra il testo trasformato
 
---- COMPLETATO
+--- *COMPLETATO*
 
 ### ### **1.2 — Mini Calcolatore IVA**
 
@@ -37,7 +37,7 @@ Tutti gli esercizi sono pensati per situazioni reali di lavoro (eCommerce, dashb
 * Bottone "Calcola"
 * Output totale formattato
 
----
+--- *COMPLETATO*
 
 ### ### **1.3 — Counter con Limiti**
 
@@ -52,7 +52,7 @@ Tutti gli esercizi sono pensati per situazioni reali di lavoro (eCommerce, dashb
 * > 180 → colore arancione
 * =200 → rosso + blocca incremento
 
----
+--- *COMPLETATO*
 
 ---
 

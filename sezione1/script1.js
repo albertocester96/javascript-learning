@@ -65,7 +65,7 @@ btnMinuscole.addEventListener("click" ,() => {
 
 
 
-//esercizio 2.1
+//esercizio 1.2
 
 
 const btn20 = document.querySelector('.js-20');
@@ -112,4 +112,30 @@ btnCalcola.addEventListener('click', () => {
         CalcolaPrezzo(selectediva)
     }
 );
+
+
+//esercizio 1.3
+
+const area = document.querySelector('.js-descrizioneProdotto');
+
+
+area.addEventListener("input", () => {
+
+    const descriptionLenght= area.value.length;
+
+     area.classList.remove('max180', 'max200');
+
+    if(descriptionLenght >= 180 && descriptionLenght < 200){
+        area.classList.remove('max200');
+        area.classList.add('max180');
+    }
+    else if(descriptionLenght >=200){
+        area.classList.remove('max180');
+        area.classList.add('max200');
+    }
+
+}
+)
+
 */
+

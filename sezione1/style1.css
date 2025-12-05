@@ -1,0 +1,14 @@
+.selected{
+    background-color: green;
+    color: white;
+}
+
+.max180 {
+    background-color: orange;
+    color: white;
+}
+
+.max200 {
+    background-color: red;
+    color: white; 
+}
