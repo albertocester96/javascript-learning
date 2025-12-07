@@ -1,10 +1,14 @@
 
 class Task {
-    constructor(title, description, status) {
+    constructor(title, description) {
         this.title = title;
         this.description = description;
-        this.status = status;
+        this.status = "incomplete";
+        this.createdAt = Date.now();
+        this.idTask = Task.idTask++;
     }
+
+    static idTask = 0;
 }
 
 const addTaskButton = document.querySelector("#addTaskButton");
@@ -38,7 +42,7 @@ function displayTasks() {
 }
 
 addTaskButton.addEventListener("click", function() {
-    newTask = new Task(taskTitle.value, taskDescription.value, "incomplete");
+    newTask = new Task(taskTitle.value, taskDescription.value);
     tasks.push(newTask);
     localStorage.setItem("task", JSON.stringify(tasks));
 
