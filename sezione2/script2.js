@@ -8,7 +8,7 @@ class Task {
         this.idTask = Task.idTask++;
     }
 
-    static idTask = 0;
+    static idTask = 0; //la proprietà statica viene condivisa tra tutte le istanze della classe, appartiene a questa e non agli oggetti creati
 }
 
 const addTaskButton = document.querySelector("#addTaskButton");
@@ -20,6 +20,7 @@ const taskListContainer = document.querySelector(".js-taskList");
 
 let tasks = []; 
 
+//funzione per visualizzare le attività salvate nel local storage
 function displayTasks() {
 
     taskListContainer.innerHTML = "";
@@ -41,6 +42,7 @@ function displayTasks() {
     }
 }
 
+//evento di click per aggiungere una nuova attività in local storage
 addTaskButton.addEventListener("click", function() {
     newTask = new Task(taskTitle.value, taskDescription.value);
     tasks.push(newTask);
