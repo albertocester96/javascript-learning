@@ -10,4 +10,11 @@ label {
             font-weight: bold;
             padding: 10px 10px;
         }
-    
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
