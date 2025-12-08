@@ -75,7 +75,7 @@ Tutti gli esercizi sono pensati per situazioni reali di lavoro (eCommerce, dashb
 * Cancella task
 * Salva automaticamente la lista
 
----
+---*COMPLETATO*
 
 ### ### **2.2 — Mini Product Filter (eCommerce)**
 
