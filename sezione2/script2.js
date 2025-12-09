@@ -80,6 +80,7 @@ class Product{
 }
 
 const categorie = {
+    tutteLeCategorie: "Tutte le categorie",
     tshirt: "T-shirt",
     jeans: "Jeans",
     sneakers: "Sneakers",
@@ -89,6 +90,7 @@ const categorie = {
     
 
 const taglia = {
+    tutteLeTaglie: "Tutte le taglie",
     small: "S",
     medium: "M",
     large: "L",
@@ -110,19 +112,35 @@ const prezzoRange = {
     high: 129.99
 };
 
-const productList = [];
 
-productList.push(new Product("Tshirt", "T-shirt in cotone", categorie.tshirt, "assets/blue_tshirt.jpeg", colore.blue, taglia.medium, prezzoRange.low));
-productList.push(new Product("Jeans", "Jeans slim fit", categorie.jeans, "assets/jeans.jpeg", colore.black, taglia.large, prezzoRange.medium));
-productList.push(new Product("Sneakers", "Sneakers da corsa", categorie.sneakers, "assets/sneakers.jpeg", colore.white, taglia.large, prezzoRange.high));
-productList.push(new Product("Giacca", "Giacca invernale", categorie.giacca, "assets/giacca.jpeg", colore.green, taglia.extraLarge, prezzoRange.high));
-productList.push(new Product("Cappello", "Cappello di lana", categorie.cappello, "assets/cappello.jpeg", colore.black, taglia.oneSize, prezzoRange.low));
-productList.push(new Product("Cappello rosso", "Cappello di lana rosso", categorie.cappello, "assets/cappello_rosso.jpeg", colore.red, taglia.oneSize, prezzoRange.low));
+const categoryFilter = document.querySelector(".js-category-filter");
+const sizeFilter = document.querySelector(".js-size-filter");
+const colorFilter = document.querySelector(".js-color-filter");
+const priceFilter = document.querySelector(".js-price-filter");
+const filterButton = document.querySelector(".js-filter-button");
+
+let productArray = [];
+let filteredProducts = [];
+const filtri = [{categorie: categoryFilter},
+                {taglia: sizeFilter},
+                {colore: colorFilter}, 
+                {prezzoRange: priceFilter}];
+
+const productList = document.querySelector(".js-product-list");
+
+productArray.push(new Product("Tshirt", "T-shirt in cotone", categorie.tshirt, "assets/blue_tshirt.jpeg", colore.blue, taglia.medium, prezzoRange.low));
+productArray.push(new Product("Jeans", "Jeans slim fit", categorie.jeans, "assets/jeans.jpeg", colore.black, taglia.large, prezzoRange.medium));
+productArray.push(new Product("Sneakers", "Sneakers da corsa", categorie.sneakers, "assets/sneakers.jpeg", colore.white, taglia.large, prezzoRange.high));
+productArray.push(new Product("Giacca", "Giacca invernale", categorie.giacca, "assets/giacca.jpeg", colore.green, taglia.extraLarge, prezzoRange.high));
+productArray.push(new Product("Cappello", "Cappello di lana", categorie.cappello, "assets/cappello.jpeg", colore.black, taglia.oneSize, prezzoRange.low));
+productArray.push(new Product("Cappello rosso", "Cappello di lana rosso", categorie.cappello, "assets/cappello_rosso.jpeg", colore.red, taglia.oneSize, prezzoRange.low));
 
 
 function DisplayProducts(products){
-    const productList = document.querySelector(".js-product-list");
 
+
+    //svota lista
+    productList.innerHTML = "";
     products.forEach(product => {
         const div = document.createElement("div");
             div.innerHTML  = `<div class="product-item">
@@ -136,32 +154,54 @@ function DisplayProducts(products){
                             <hr>
                             </div>
                             </div>`;
-
-    productList.appendChild(div);
-    DisplayProducts(products);
-})
-};;
-
-
-
-const categoryFilter = document.querySelector(".js-category-filter");
-const sizeFilter = document.querySelector(".js-size-filter");
-const colorFilter = document.querySelector(".js-color-filter");
-const priceFilter = document.querySelector(".js-price-filter");
-const filterButton = document.querySelector(".js-filter-button");
-
-Object.values(categorie).forEach (categoria => {
-    const option = document.createElement("option");
-    option.innerHTML = `<option value="${categoria}">${categoria}</option>`;
-    categoryFilter.appendChild(option);
-})
-
-categoryFilter.addEventListener("change", (categoria) => {
-    selectedCategory = categoria.target.value;
+        productList.appendChild(div);
+    })
     
-    const filteredProducts = productList.filter( product => product.category === selectedCategory )
-    console.log(filteredProducts);
-    DisplayProducts(filteredProducts);
 
+};
+
+
+categoryFilter.addEventListener("change", (cat) => {
+    selectedCategory = cat.target.value; 
+
+    if(selectedCategory === "tutteLeCategorie") {
+        DisplayProducts(productArray);
+    }
+
+    else {
+        filteredProducts = productArray.filter( product => product.category === categorie[selectedCategory] )
+
+        DisplayProducts(filteredProducts);
+
+    }
+    
 })
+
+filtri.forEach( (filtro.key, filtro.value) => {
+    Object.entries(filtro).forEach(([key, value]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = value;
+    filtroElement.appendChild(option);
+});
+})
+
+
+sizeFilter.addEventListener("change", (size) => {
+    selectedSize = size.target.value; 
+
+    if(selectedSize === "tutteLeTaglie") {
+        DisplayProducts(productArray);
+    }
+
+    else {
+        filteredProducts = productArray.filter( product => product.size === taglia[selectedSize] )
+
+        DisplayProducts(filteredProducts);
+
+    }
+    
+})
+
+DisplayProducts(productArray);
 
