@@ -99,7 +99,7 @@ const products = [
 * Mostrare solo i prodotti ≤ prezzo inserito
 * Messaggio "0 risultati" se necessario
 
----
+--- *COMPLETATO*
 
 ### ### **2.3 — Countdown Timer Professionale**
 

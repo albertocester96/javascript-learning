@@ -99,6 +99,7 @@ const taglia = {
 };
 
 const colore = {
+    tuttiiIColori: "Tutti i colori",
     blue: "blue",
     black: "black",
     white: "white",
@@ -107,6 +108,7 @@ const colore = {
 };
 
 const prezzoRange = {
+    tuttiiIPrezzi: "Tutti i prezzi",
     low: 19.99,
     medium: 49.99,
     high: 129.99
@@ -117,14 +119,13 @@ const categoryFilter = document.querySelector(".js-category-filter");
 const sizeFilter = document.querySelector(".js-size-filter");
 const colorFilter = document.querySelector(".js-color-filter");
 const priceFilter = document.querySelector(".js-price-filter");
-const filterButton = document.querySelector(".js-filter-button");
 
 let productArray = [];
 let filteredProducts = [];
-const filtri = [{categorie: categoryFilter},
-                {taglia: sizeFilter},
-                {colore: colorFilter}, 
-                {prezzoRange: priceFilter}];
+const filtri = [{ProductProperty: "category",Object: categorie , DOMElement: categoryFilter, default: "tutteLeCategorie"},
+                {ProductProperty: "size", Object: taglia, DOMElement: sizeFilter, default: "tutteLeTaglie"},
+                {ProductProperty: "color",Object: colore, DOMElement: colorFilter, default: "tuttiiIColori"}, 
+                {ProductProperty: "price",Object: prezzoRange, DOMElement: priceFilter, default: "tuttiiIPrezzi"}];
 
 const productList = document.querySelector(".js-product-list");
 
@@ -161,47 +162,32 @@ function DisplayProducts(products){
 };
 
 
-categoryFilter.addEventListener("change", (cat) => {
-    selectedCategory = cat.target.value; 
+//popola i filtri in modo dinamico
+filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMElement: categoryFilter}
 
-    if(selectedCategory === "tutteLeCategorie") {
-        DisplayProducts(productArray);
-    }
-
-    else {
-        filteredProducts = productArray.filter( product => product.category === categorie[selectedCategory] )
-
-        DisplayProducts(filteredProducts);
-
-    }
-    
-})
-
-filtri.forEach( (filtro.key, filtro.value) => {
-    Object.entries(filtro).forEach(([key, value]) => {
+    Object.entries(filtroObj.Object).forEach(([key, value]) => { //itero per ogni coppia chiave-valore dell'oggetti "filtro"
     const option = document.createElement("option");
     option.value = key;
     option.textContent = value;
-    filtroElement.appendChild(option);
+    filtroObj.DOMElement.appendChild(option); //appendo l'elemento option al DOMElement corrispondente
 });
 })
 
+filtri.forEach( function( filtroObj ) {
+    filtroObj.DOMElement.addEventListener("change", (event) => {
+        const selectedValue = event.target.value;
 
-sizeFilter.addEventListener("change", (size) => {
-    selectedSize = size.target.value; 
+        if(selectedValue === filtroObj.default){
+            DisplayProducts(productArray);
+        }
+        else{
+            propertyFilter = filtroObj.ProductProperty;
+            filteredProducts = productArray.filter( product => product[propertyFilter] === filtroObj.Object[selectedValue])
+            DisplayProducts(filteredProducts);
+        }
+    });
+});
 
-    if(selectedSize === "tutteLeTaglie") {
-        DisplayProducts(productArray);
-    }
-
-    else {
-        filteredProducts = productArray.filter( product => product.size === taglia[selectedSize] )
-
-        DisplayProducts(filteredProducts);
-
-    }
-    
-})
 
 DisplayProducts(productArray);
 
