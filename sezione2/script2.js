@@ -176,6 +176,7 @@ filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMEl
 
 const filtroList = [];
 
+/*
 filtri.forEach( function( filtroObj ) {
     filtroObj.DOMElement.addEventListener("change", (event) => {
         const selectedValue = event.target.value;
@@ -184,19 +185,33 @@ filtri.forEach( function( filtroObj ) {
         return DisplayProducts(productArray);
         }
     
-        filtroList.push(selectedValue);
+        filtroList = [selectedValue]; //da modificare
     });
 });
         
 filteredProducts = productArray.filter( product => {
-    const productValues = Object.values(product)
+    const productKeys = Object.entries(product).forEach(([key]) => {
+        return key;
+
     
+    })
 
     return filtroList.every(filter => productValues.includes(filter));
 });
+*/
+
+productArray.forEach( products => {
+    const productValues = Object.keys(products);
+    
+    filteredProducts = productArray.filter( product => productValues.includes())
+    })
+    })  
+})
 
    
 
 //console.log(arraytest = [productArray[0].category, productArray[0].color]);
 DisplayProducts(filteredProducts);
 
+//l'obiettivo è creare un array da mostrare che viene riassegnato con tutti i valori dei filtri selezionati "attivi" e poi filtrare l'array dei prodotti in base a questi valori.
+//es. se seleziono "L" e  "black" l'array conterrà ["Tutte le categorie", "L", "Black", "Tutti i prezzi"]. 
