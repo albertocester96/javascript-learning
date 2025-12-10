@@ -122,10 +122,6 @@ const priceFilter = document.querySelector(".js-price-filter");
 
 let productArray = [];
 let filteredProducts = [];
-const filtri = [{ProductProperty: "category",Object: categorie , DOMElement: categoryFilter, default: "tutteLeCategorie"},
-                {ProductProperty: "size", Object: taglia, DOMElement: sizeFilter, default: "tutteLeTaglie"},
-                {ProductProperty: "color",Object: colore, DOMElement: colorFilter, default: "tuttiiIColori"}, 
-                {ProductProperty: "price",Object: prezzoRange, DOMElement: priceFilter, default: "tuttiiIPrezzi"}];
 
 const productList = document.querySelector(".js-product-list");
 
@@ -161,6 +157,11 @@ function DisplayProducts(products){
 
 };
 
+const filtri = [{Object: categorie , DOMElement: categoryFilter, default: "tutteLeCategorie"},
+                {Object: taglia, DOMElement: sizeFilter, default: "tutteLeTaglie"},
+                {Object: colore, DOMElement: colorFilter, default: "tuttiiIColori"}, 
+                {Object: prezzoRange, DOMElement: priceFilter, default: "tuttiiIPrezzi"}];
+
 
 //popola i filtri in modo dinamico
 filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMElement: categoryFilter}
@@ -173,21 +174,29 @@ filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMEl
 });
 })
 
+const filtroList = [];
+
 filtri.forEach( function( filtroObj ) {
     filtroObj.DOMElement.addEventListener("change", (event) => {
         const selectedValue = event.target.value;
 
         if(selectedValue === filtroObj.default){
-            DisplayProducts(productArray);
+        return DisplayProducts(productArray);
         }
-        else{
-            propertyFilter = filtroObj.ProductProperty;
-            filteredProducts = productArray.filter( product => product[propertyFilter] === filtroObj.Object[selectedValue])
-            DisplayProducts(filteredProducts);
-        }
+    
+        filtroList.push(selectedValue);
     });
 });
+        
+filteredProducts = productArray.filter( product => {
+    const productValues = Object.values(product)
+    
 
+    return filtroList.every(filter => productValues.includes(filter));
+});
 
-DisplayProducts(productArray);
+   
+
+//console.log(arraytest = [productArray[0].category, productArray[0].color]);
+DisplayProducts(filteredProducts);
 
