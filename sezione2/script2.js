@@ -132,7 +132,6 @@ productArray.push(new Product("Giacca", "Giacca invernale", categorie.giacca, "a
 productArray.push(new Product("Cappello", "Cappello di lana", categorie.cappello, "assets/cappello.jpeg", colore.black, taglia.oneSize, prezzoRange.low));
 productArray.push(new Product("Cappello rosso", "Cappello di lana rosso", categorie.cappello, "assets/cappello_rosso.jpeg", colore.red, taglia.oneSize, prezzoRange.low));
 
-
 function DisplayProducts(products){
 
 
@@ -168,15 +167,19 @@ filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMEl
 
     Object.entries(filtroObj.Object).forEach(([key, value]) => { //itero per ogni coppia chiave-valore dell'oggetti "filtro"
     const option = document.createElement("option");
-    option.value = key;
+    option.value = value;
     option.textContent = value;
     filtroObj.DOMElement.appendChild(option); //appendo l'elemento option al DOMElement corrispondente
 });
 })
 
-const filtroList = [];
+const filtroList = {
+    categoria: "Tutte le categorie",
+    taglia: "Tutte le taglie",
+    colore: "Tutti i colori",
+    prezzo: "Tutt i prezzi"
+};
 
-/*
 filtri.forEach( function( filtroObj ) {
     filtroObj.DOMElement.addEventListener("change", (event) => {
         const selectedValue = event.target.value;
@@ -185,33 +188,35 @@ filtri.forEach( function( filtroObj ) {
         return DisplayProducts(productArray);
         }
     
-        filtroList = [selectedValue]; //da modificare
+        if (filtroObj.Object === "categorie") {
+            filtroList.categoria = selectedValue;
+        }
+        else if (filtroObj.Object === "taglia") {
+            filtroList.taglia = selectedValue;
+        }
+        else if (filtroObj.Object === "colore") {
+            filtroList.colore = selectedValue;
+        }
+        else {
+            filtroList.prezzo = selectedValue;
+        }
+
+        FiltraValori();
     });
 });
-        
-filteredProducts = productArray.filter( product => {
-    const productKeys = Object.entries(product).forEach(([key]) => {
-        return key;
 
-    
+function FiltraValori(){
+    filteredProducts = productArray.filter( product => {
+        return Object.entries(filtroList).every(([key, filterValue]) => {
+
+            if (filterValue === null) {
+                return true
+            };
+            return product[key] === filterValue;
+        })
     })
+}
 
-    return filtroList.every(filter => productValues.includes(filter));
-});
-*/
 
-productArray.forEach( products => {
-    const productValues = Object.keys(products);
-    
-    filteredProducts = productArray.filter( product => productValues.includes())
-    })
-    })  
-})
-
-   
-
-//console.log(arraytest = [productArray[0].category, productArray[0].color]);
 DisplayProducts(filteredProducts);
 
-//l'obiettivo è creare un array da mostrare che viene riassegnato con tutti i valori dei filtri selezionati "attivi" e poi filtrare l'array dei prodotti in base a questi valori.
-//es. se seleziono "L" e  "black" l'array conterrà ["Tutte le categorie", "L", "Black", "Tutti i prezzi"]. 
