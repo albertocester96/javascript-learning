@@ -130,7 +130,7 @@ productArray.push(new Product("Tshirt", "T-shirt in cotone", categorie.tshirt, "
 productArray.push(new Product("Jeans", "Jeans slim fit", categorie.jeans, "assets/jeans.jpeg", colore.black, taglia.large, prezzoRange.medium));
 productArray.push(new Product("Sneakers", "Sneakers da corsa", categorie.sneakers, "assets/sneakers.jpeg", colore.white, taglia.large, prezzoRange.high));
 productArray.push(new Product("Giacca", "Giacca invernale", categorie.giacca, "assets/giacca.jpeg", colore.green, taglia.extraLarge, prezzoRange.high));
-productArray.push(new Product("Cappello", "Cappello di lana", categorie.cappello, "assets/cappello.jpeg", colore.black, taglia.oneSize, prezzoRange.low));
+productArray.push(new Product("Cappello", "Cappello di lana", categorie.cappello, "assets/cappello.jpeg", colore.white, taglia.oneSize, prezzoRange.low));
 productArray.push(new Product("Cappello rosso", "Cappello di lana rosso", categorie.cappello, "assets/cappello_rosso.jpeg", colore.red, taglia.oneSize, prezzoRange.low));
 
 function DisplayProducts(products){
@@ -174,6 +174,7 @@ filtri.forEach( function( filtroObj ) { //filtroObj = {Object: categorie , DOMEl
 });
 })
 
+//crea un oggetto contentente i valori selezionati nei filtri
 const filtroList = {
     categoria: "Tutte le categorie",
     taglia: "Tutte le taglie",
@@ -181,6 +182,7 @@ const filtroList = {
     prezzo: "Tutti i prezzi"
 };
 
+//aggiungi un event listener al container dei filtri per catturare i cambiamenti in tutti i filtri e assegnare i valori selezionati all'oggetto filtroList
 filterContainer.addEventListener("change", (event) => {
     const selectedValue = event.target.value;
     const className = event.target.className;
@@ -198,10 +200,10 @@ filterContainer.addEventListener("change", (event) => {
     else { 
         filtroList.prezzo = selectedValue;
     }
-    FiltraValori();
+    FiltraValori(); //chiama la funzione per filtrare i prodotti in base ai valori selezionati (assegnati all'oggetto filtroList)
 });
 
-
+//la funzione filtra i prodotti in base ai valori selezionati nei filtri 
 function FiltraValori(){
     console.log(filtroList);
 
@@ -219,8 +221,10 @@ function FiltraValori(){
         const priceMatch = filtroList.prezzo === "Tutti i prezzi" || 
                            product.price === parseFloat(filtroList.prezzo);
 
-        return categoryMatch && sizeMatch && colorMatch && priceMatch;
-    });
+        //ritorna true (quindi l'elemento viene incluso nell'array filtrato) solo se tutte le condizioni sono vere. Se anche una sola è falsa, l'elemento viene escluso. 
+        //Esempio: se il prodotto 1 ha la categoria jenas ma sul filtro categoria viene selezionato T-shirt, questo prodotto non verrà inserito all'interno dell'array filtrato
+        return categoryMatch && sizeMatch && colorMatch && priceMatch; 
+    ù});
 
     DisplayProducts(filteredProducts);
 }
