@@ -68,9 +68,9 @@ displayTasks();
 //Esercizio 2.2 - filtri per collezione di oggetti
 
 class Product{
-    constructor(name, decription, category, image, color, size, price){
+    constructor(name, description, category, image, color, size, price){
         this.name = name;
-        this.description = decription;
+        this.description = description;
         this.category = category;
         this.image = image;
         this.color = color;
@@ -119,6 +119,7 @@ const categoryFilter = document.querySelector(".js-category-filter");
 const sizeFilter = document.querySelector(".js-size-filter");
 const colorFilter = document.querySelector(".js-color-filter");
 const priceFilter = document.querySelector(".js-price-filter");
+const filterContainer = document.querySelector(".js-filterContainer");
 
 let productArray = [];
 let filteredProducts = [];
@@ -177,46 +178,53 @@ const filtroList = {
     categoria: "Tutte le categorie",
     taglia: "Tutte le taglie",
     colore: "Tutti i colori",
-    prezzo: "Tutt i prezzi"
+    prezzo: "Tutti i prezzi"
 };
 
-filtri.forEach( function( filtroObj ) {
-    filtroObj.DOMElement.addEventListener("change", (event) => {
-        const selectedValue = event.target.value;
-
-        if(selectedValue === filtroObj.default){
-        return DisplayProducts(productArray);
-        }
+filterContainer.addEventListener("change", (event) => {
+    const selectedValue = event.target.value;
+    const className = event.target.className;
     
-        if (filtroObj.Object === "categorie") {
-            filtroList.categoria = selectedValue;
-        }
-        else if (filtroObj.Object === "taglia") {
-            filtroList.taglia = selectedValue;
-        }
-        else if (filtroObj.Object === "colore") {
-            filtroList.colore = selectedValue;
-        }
-        else {
-            filtroList.prezzo = selectedValue;
-        }
 
-        FiltraValori();
-    });
+    if(className === categoryFilter.className) {
+        filtroList.categoria = selectedValue;
+    }
+    else if(className === sizeFilter.className) {
+        filtroList.taglia = selectedValue;
+    }  
+    else if(className === colorFilter.className) {
+        filtroList.colore = selectedValue;
+    }
+    else { 
+        filtroList.prezzo = selectedValue;
+    }
+    FiltraValori();
 });
 
-function FiltraValori(){
-    filteredProducts = productArray.filter( product => {
-        return Object.entries(filtroList).every(([key, filterValue]) => {
 
-            if (filterValue === null) {
-                return true
-            };
-            return product[key] === filterValue;
-        })
-    })
+function FiltraValori(){
+    console.log(filtroList);
+
+    filteredProducts = productArray.filter(product => {
+        // Se il filtro è sul valore default, accetta tutti i prodotti per quel filtro
+        const categoryMatch = filtroList.categoria === "Tutte le categorie" || 
+                              product.category === filtroList.categoria;
+        
+        const sizeMatch = filtroList.taglia === "Tutte le taglie" || 
+                          product.size === filtroList.taglia;
+        
+        const colorMatch = filtroList.colore === "Tutti i colori" || 
+                           product.color === filtroList.colore;
+        
+        const priceMatch = filtroList.prezzo === "Tutti i prezzi" || 
+                           product.price === parseFloat(filtroList.prezzo);
+
+        return categoryMatch && sizeMatch && colorMatch && priceMatch;
+    });
+
+    DisplayProducts(filteredProducts);
 }
 
 
-DisplayProducts(filteredProducts);
+DisplayProducts(productArray);
 
