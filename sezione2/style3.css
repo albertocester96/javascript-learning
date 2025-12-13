@@ -5,3 +5,20 @@
             padding: 20px;
         }
 
+.search-container {
+    display: flex;
+    row-gap: 0px;
+}
+
+.crypto-first-row {
+    display: flex;
+    column-gap: 10px;
+}
+
+
+.crypto-second-row {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+}
