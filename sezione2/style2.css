@@ -18,3 +18,12 @@ label {
     border-radius: 5px;
     padding: 10px;
 }
+
+.js-timer .timer-box{
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin: 0.5rem;
+    min-width: 50px;
+}

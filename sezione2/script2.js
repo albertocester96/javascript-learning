@@ -243,44 +243,38 @@ const jsHours = document.querySelector(".js-hours");
 const jsMinutes = document.querySelector(".js-minutes");
 const jsSeconds = document.querySelector(".js-seconds");
 
+const endOffer = new Date("2025-12-14T00:00:00Z");
 
-
-const end = Date.parse("14 Dec 2025 00:00:00 GMT")
-const now = Date.now();
-
-function GetInitialDate() {
-    const currentDate = new Date();
-
-    const currentHours = String(currentDate.getHours()).padStart(2, 0);
-    jsHours.innerHTML = currentHours;
-
-    const currentMinutes = String(currentDate.getMinutes()).padStart(2,0);
-    jsMinutes.innerHTML = currentMinutes;
-
-    const currentSeconds = String(currentDate.getSeconds()).padStart(2, 0);
-    jsSeconds.innerHTML = currentSeconds;
+function StartSessiontimer(){
+    CalculateTimeRemaing("hours");
+    CalculateTimeRemaing("minutes");
+    CalculateTimeRemaing("seconds");
 }
 
-GetInitialDate();
+StartSessiontimer(); //mostra i valori inziali all'inizio della sessione (questo perché setInterval inizia dopo o secondi impostati);
 
-setInterval( () => {
-    const currentDate = new Date();
-    const currentSeconds = String(currentDate.getSeconds()).padStart(2, 0);
-    jsSeconds.innerHTML = currentSeconds;
-}, 1000);
+function CalculateTimeRemaing(time) {
+    const now = Date.now();
+    const timeRemaining = endOffer - now;
 
-setInterval(() => {
-    const currentDate = new Date();
-    const currentMinutes = String(currentDate.getMinutes()).padStart(2,0);
-    jsMinutes.innerHTML = currentMinutes;
-}, 60000)
+    if (time == "hours"){
+        const hours = Math.floor(timeRemaining / (3600000)); //arrotondo per difetto le ore mancanti calcolate divendendo i ms rimanti con l'equivalente di 1 ora in millisecondi
+        jsHours.innerHTML = String(hours).padStart(2,0); //converti in stringa e trasforma in due numeri 
+    }
+    if (time == "minutes"){
+        const minutes = Math.floor((timeRemaining / (1000 * 60)) % 60); // % CALCOLA IL TEMPO RESTANTE
+        jsMinutes.innerHTML = String(minutes).padStart(2,0);
+    }
+    if (time == "seconds") {        
+        const seconds = Math.floor((timeRemaining / 1000) % 60);
+        jsSeconds.innerHTML = String(seconds).padStart(2,0);
+    }
+};
 
-setInterval(() => {
-    const currentDate = new Date();
-    const currentHours = String(currentDate.getMinutes()).padStart(2,0);
-    jsMinutes.innerHTML = currentHours;
-}, 3600000)
+setInterval( () => CalculateTimeRemaing("seconds"), 1000); //OGNI SECONDO
+setInterval( () => CalculateTimeRemaing("minutes"), 60000); //OGNI 60 SECONDI
+setInterval( () => CalculateTimeRemaing("hours"), 3600000); //OGNI 3600 SECONDI
 
-/*jsHours.textContent = currentDate.getHours();
-const timeRemaining = end - now;
-console.log(currentDate);*/
+
+
+

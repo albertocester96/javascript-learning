@@ -113,7 +113,7 @@ const products = [
 * Update ogni secondo
 * Alla fine → mostra messaggio “Offerta scaduta”
 
----
+--- *COMPLETO*
 
 ---
 
