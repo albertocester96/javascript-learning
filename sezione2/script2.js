@@ -63,7 +63,7 @@ taskListContainer.addEventListener("click", function(e) {
 });
 
 displayTasks();
-*/
+
 
 //Esercizio 2.2 - filtri per collezione di oggetti
 
@@ -205,9 +205,9 @@ filterContainer.addEventListener("change", (event) => {
 
 //la funzione filtra i prodotti in base ai valori selezionati nei filtri 
 function FiltraValori(){
-    console.log(filtroList);
 
     filteredProducts = productArray.filter(product => {
+
         // Se il filtro è sul valore default, accetta tutti i prodotti per quel filtro
         const categoryMatch = filtroList.categoria === "Tutte le categorie" || 
                               product.category === filtroList.categoria;
@@ -223,8 +223,8 @@ function FiltraValori(){
 
         //ritorna true (quindi l'elemento viene incluso nell'array filtrato) solo se tutte le condizioni sono vere. Se anche una sola è falsa, l'elemento viene escluso. 
         //Esempio: se il prodotto 1 ha la categoria jenas ma sul filtro categoria viene selezionato T-shirt, questo prodotto non verrà inserito all'interno dell'array filtrato
-        return categoryMatch && sizeMatch && colorMatch && priceMatch; 
-    ù});
+        return categoryMatch && sizeMatch && colorMatch && priceMatch   
+    });
 
     DisplayProducts(filteredProducts);
 }
@@ -232,3 +232,55 @@ function FiltraValori(){
 
 DisplayProducts(productArray);
 
+//da aggiungere "prodotto non trovato"
+
+*/
+
+
+//ESERCIZIO 2.3 - COUNTDOWN TIMER
+
+const jsHours = document.querySelector(".js-hours");
+const jsMinutes = document.querySelector(".js-minutes");
+const jsSeconds = document.querySelector(".js-seconds");
+
+
+
+const end = Date.parse("14 Dec 2025 00:00:00 GMT")
+const now = Date.now();
+
+function GetInitialDate() {
+    const currentDate = new Date();
+
+    const currentHours = String(currentDate.getHours()).padStart(2, 0);
+    jsHours.innerHTML = currentHours;
+
+    const currentMinutes = String(currentDate.getMinutes()).padStart(2,0);
+    jsMinutes.innerHTML = currentMinutes;
+
+    const currentSeconds = String(currentDate.getSeconds()).padStart(2, 0);
+    jsSeconds.innerHTML = currentSeconds;
+}
+
+GetInitialDate();
+
+setInterval( () => {
+    const currentDate = new Date();
+    const currentSeconds = String(currentDate.getSeconds()).padStart(2, 0);
+    jsSeconds.innerHTML = currentSeconds;
+}, 1000);
+
+setInterval(() => {
+    const currentDate = new Date();
+    const currentMinutes = String(currentDate.getMinutes()).padStart(2,0);
+    jsMinutes.innerHTML = currentMinutes;
+}, 60000)
+
+setInterval(() => {
+    const currentDate = new Date();
+    const currentHours = String(currentDate.getMinutes()).padStart(2,0);
+    jsMinutes.innerHTML = currentHours;
+}, 3600000)
+
+/*jsHours.textContent = currentDate.getHours();
+const timeRemaining = end - now;
+console.log(currentDate);*/
