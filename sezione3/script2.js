@@ -234,7 +234,7 @@ DisplayProducts(productArray);
 
 //da aggiungere "prodotto non trovato"
 
-*/
+
 
 
 //ESERCIZIO 2.3 - COUNTDOWN TIMER
@@ -275,6 +275,6 @@ setInterval( () => CalculateTimeRemaing("seconds"), 1000); //OGNI SECONDO
 setInterval( () => CalculateTimeRemaing("minutes"), 60000); //OGNI 60 SECONDI
 setInterval( () => CalculateTimeRemaing("hours"), 3600000); //OGNI 3600 SECONDI
 
-
+*/
 
 
